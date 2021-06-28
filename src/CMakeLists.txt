@@ -4,3 +4,4 @@ add_executable(bmpfilter
     memory.c
     image.c
 )
+target_link_libraries(bmpfilter m)

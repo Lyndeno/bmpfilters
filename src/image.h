@@ -13,5 +13,6 @@ void makeGreen( pixel** input, pixel** output, int x, int y, uint32_t width, uin
 void makeGrey( pixel** input, pixel** output, int x, int y, uint32_t width, uint32_t height);
 void makeBW( pixel** input, pixel** output, int x, int y, uint32_t width, uint32_t height);
 void makeBlur( pixel** input, pixel** output, int x, int y, uint32_t width, uint32_t height);
+void makeFlat( pixel** input, pixel** output, int x, int y, uint32_t width, uint32_t height);
 
 #endif
