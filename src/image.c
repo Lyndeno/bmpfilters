@@ -1,5 +1,4 @@
 #include "image.h"
-#include <math.h>
 
 // Dimensions of square to blur around, odd values will probably work better
 // 7x7 is the required dimensions for this assignment
@@ -100,8 +99,8 @@ void makeBlur( pixel** input, pixel** output, int x, int y, uint32_t width, uint
 }
 
 void makeFlat( pixel** input, pixel** output, int x, int y, uint32_t width, uint32_t height) {
-	int x_offset = (51 - 1) / 2;
-	int y_offset = (51 - 1) / 2;
+	int x_offset = (5 - 1) / 2;
+	int y_offset = (5 - 1) / 2;
 
 	int h_low_bound = x - x_offset;
 	int h_high_bound = x + x_offset;
@@ -114,14 +113,14 @@ void makeFlat( pixel** input, pixel** output, int x, int y, uint32_t width, uint
 	if (v_low_bound < 0 ) { v_low_bound = 0; }
 	if (v_high_bound >= height ) { v_high_bound = height - 1; }
 
-	double min_distance, current_distance;
+	int min_distance, current_distance;
 	uint8_t r_close, g_close, b_close;
 	min_distance = 255;
 
 	for ( int i = h_low_bound; i <= h_high_bound; i++) {
 		for ( int j = v_low_bound; j <= v_high_bound; j++) {
 			if ( !(i == x && j == y) ) {
-				current_distance = sqrt(pow((double)input[i][j].red - (double)input[x][y].red, 2) + pow((double)input[i][j].green - (double)input[x][y].green, 2) + pow((double)input[i][j].blue - (double)input[x][y].blue, 2) );
+				current_distance = input[i][j].red - input[x][y].red + input[i][j].green - input[x][y].green + input[i][j].blue - input[x][y].blue;
 				if (current_distance < min_distance) {
 					min_distance = current_distance;
 					r_close = input[i][j].red;
