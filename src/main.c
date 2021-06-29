@@ -143,10 +143,10 @@ int main(void) {
 
     // "Flatten" the image
     outputName[0] = '\0'; // Empty string
-    strcat(strcat(strcat(outputName, fileName), "_flat"), fileExt); // Create descriptive filename
+    strcat(strcat(strcat(outputName, fileName), "_blotch"), fileExt); // Create descriptive filename
     outputFile = fopen(outputName, "w+"); // open the file for writing
     if ( outputFile == NULL ) { printf("Could not open %s for writing", outputName); return -1; } // return an error if something goes wrong
-    editPixels(makeFlat, inputPixels, outputPixels, pxWidth, pxHeight); // Create the output pixel array
+    editPixels(makeBlotch, inputPixels, outputPixels, pxWidth, pxHeight); // Create the output pixel array
     // Write the information to our new file
     writeHeader(inputfile, outputFile, pxOffset);
     writePixels(outputFile, outputPixels, pxWidth, pxHeight, pxOffset, padding);

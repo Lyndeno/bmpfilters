@@ -1,4 +1,5 @@
 #include "image.h"
+#include <stdlib.h>
 
 // Dimensions of square to blur around, odd values will probably work better
 // 7x7 is the required dimensions for this assignment
@@ -98,7 +99,7 @@ void makeBlur( pixel** input, pixel** output, int x, int y, uint32_t width, uint
 
 }
 
-void makeFlat( pixel** input, pixel** output, int x, int y, uint32_t width, uint32_t height) {
+void makeBlotch( pixel** input, pixel** output, int x, int y, uint32_t width, uint32_t height) {
 	int x_offset = (5 - 1) / 2;
 	int y_offset = (5 - 1) / 2;
 
@@ -135,3 +136,8 @@ void makeFlat( pixel** input, pixel** output, int x, int y, uint32_t width, uint
 	output[x][y].green = g_close;
 	output[x][y].blue = b_close;
 }
+
+/*
+void populateList( pixel** input, pixel* pixelList, int x, int y) {
+			
+}*/
