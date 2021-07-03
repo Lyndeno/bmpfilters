@@ -2,6 +2,7 @@
 #define FLATTEN_H
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include "data.h"
 
 typedef struct pixelDict {
@@ -10,12 +11,12 @@ typedef struct pixelDict {
 	struct pixelDict *next;
 } pixelDict;
 
+void addPixel(pixelDict *oldEntry, pixel newColour);
+bool comparePixels(pixel *a, pixel *b);
+pixel *processPixel(pixelDict *dictStart, pixel currentPixel);
+void makeFlat(pixel **input, pixel **output, uint32_t width, uint32_t height);
+pixel ***allocatePtrs(uint32_t width, uint32_t height);
+void freePtrs(pixel ***oldArray, uint32_t width, uint32_t height);
+
 #endif
 
-void recalcAvg(pixelDict *oldEntry, pixel newColour) {
-	(oldEntry->total)++;
-
-	oldEntry->colour.red = ( (oldEntry->colour.red * (oldEntry->total - 1)) + newColour.red) / oldEntry->total; 
-	oldEntry->colour.green = ( (oldEntry->colour.green * (oldEntry->total - 1)) + newColour.green) / oldEntry->total; 
-	oldEntry->colour.blue = ( (oldEntry->colour.blue * (oldEntry->total - 1)) + newColour.blue) / oldEntry->total;
-}

@@ -7,6 +7,7 @@
 #include "memory.h"
 #include "fileIO.h"
 #include "image.h"
+#include "flatten.h"
 
 
 void getFileInfo();
@@ -141,12 +142,24 @@ int main(void) {
     writePixels(outputFile, outputPixels, pxWidth, pxHeight, pxOffset, padding);
     fclose(outputFile); // Close the file
 
-    // "Flatten" the image
+    // Blotch the image
     outputName[0] = '\0'; // Empty string
     strcat(strcat(strcat(outputName, fileName), "_blotch"), fileExt); // Create descriptive filename
     outputFile = fopen(outputName, "w+"); // open the file for writing
     if ( outputFile == NULL ) { printf("Could not open %s for writing", outputName); return -1; } // return an error if something goes wrong
     editPixels(makeBlotch, inputPixels, outputPixels, pxWidth, pxHeight); // Create the output pixel array
+    // Write the information to our new file
+    writeHeader(inputfile, outputFile, pxOffset);
+    writePixels(outputFile, outputPixels, pxWidth, pxHeight, pxOffset, padding);
+    fclose(outputFile); // Close the file
+
+    // Flatten the image
+    outputName[0] = '\0'; // Empty string
+    strcat(strcat(strcat(outputName, fileName), "_flat"), fileExt); // Create descriptive filename
+    outputFile = fopen(outputName, "w+"); // open the file for writing
+    if ( outputFile == NULL ) { printf("Could not open %s for writing", outputName); return -1; } // return an error if something goes wrong
+    //editPixels(makeBlotch, inputPixels, outputPixels, pxWidth, pxHeight); // Create the output pixel array
+    makeFlat(inputPixels, outputPixels, pxWidth, pxHeight);
     // Write the information to our new file
     writeHeader(inputfile, outputFile, pxOffset);
     writePixels(outputFile, outputPixels, pxWidth, pxHeight, pxOffset, padding);

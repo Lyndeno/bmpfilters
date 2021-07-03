@@ -3,4 +3,5 @@ add_executable(bmpfilter
     fileIO.c
     memory.c
     image.c
+    flatten.c
 )
